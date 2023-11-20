@@ -5,27 +5,16 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".WelcomeFragment">
+    tools:context=".QuizFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:id="@+id/welcomeMessage"
+        android:id="@+id/titleMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to WafDogs !"
+        android:text="What is this race !?"
         android:layout_margin="60dp"
         android:padding="16dp"
         android:background="#9999FF"
         android:textSize="24sp"
-        />
-
-    <Button
-        android:id="@+id/playButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start game"
-        android:layout_margin="16dp"
-        android:paddingHorizontal="24dp"
-        android:textSize="14sp"
         />
 </LinearLayout>
