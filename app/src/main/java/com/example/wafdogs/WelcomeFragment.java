@@ -45,7 +45,7 @@ public class WelcomeFragment extends Fragment {
                 FragmentManager fragmentManager = getParentFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 QuizFragment quizFragment = QuizFragment.newInstance();
-                fragmentTransaction.add(R.id.fragment_container_view, quizFragment);
+                fragmentTransaction.replace(R.id.fragment_container_view, quizFragment);
                 fragmentTransaction.commit();
             }
         });
