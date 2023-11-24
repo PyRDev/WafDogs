@@ -9,26 +9,36 @@ public class Question {
     private String correctAnswer;
     private ArrayList<String> badAnswer;
 
-    private Question(String image, String correctAnswer) {
-        this.image = image;
-        this.correctAnswer = correctAnswer;
-        this.badAnswer = this.createBadAnswerList();
+    private String[] dogsBreed = {
+            "Labrador Retriever",
+            "Berger Allemand",
+            "Bulldog Français",
+            "Golden Retriever",
+            "Caniche",
+            "Chihuahua",
+            "Dalmatien",
+            "Husky Sibérien",
+            "Beagle",
+            "Bouledogue Anglais"
+    };
+
+    public Question() {
+        this.image = "image.png";
+        this.correctAnswer = "";
     }
 
-    private ArrayList<String> createBadAnswerList(){
-        String[] dogsBreed = {
-                "Labrador Retriever",
-                "Berger Allemand",
-                "Bulldog Français",
-                "Golden Retriever",
-                "Caniche",
-                "Chihuahua",
-                "Dalmatien",
-                "Husky Sibérien",
-                "Beagle",
-                "Bouledogue Anglais"
-        };
+    public void computeNewQuestion() {
+        this.setCorrectAnswer();
+        this.setBadAnswerList();
+    }
 
+    public void setCorrectAnswer() {
+        Random random = new Random();
+        int randomIndex = random.nextInt(dogsBreed.length);
+        this.correctAnswer = dogsBreed[randomIndex];
+    }
+
+    public void setBadAnswerList(){
         ArrayList<String> selectedDogsBreed = new ArrayList<>();
 
         Random random = new Random();
@@ -42,18 +52,18 @@ public class Question {
             selectedDogsBreed.add(dogsBreed[randomIndex]);
         }
 
-        return selectedDogsBreed;
+        this.badAnswer = selectedDogsBreed;
     }
 
-    private String getImage() {
+    public String getImage() {
         return image;
     }
 
-    private String getCorrectAnswer() {
+    public String getCorrectAnswer() {
         return correctAnswer;
     }
 
-    private ArrayList<String> getBadAnswer() {
+    public ArrayList<String> getBadAnswer() {
         return badAnswer;
     }
 }
