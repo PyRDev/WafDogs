@@ -2,31 +2,28 @@ package com.example.wafdogs.data;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
 public class Question {
 
-    private String image;
+    private Map<String, String> dogsBreed = new HashMap<>();
     private String correctAnswer;
     private ArrayList<String> badAnswer;
 
-    private String[] dogsBreed = {
-            "Labrador Retriever",
-            "Berger Allemand",
-            "Bulldog Français",
-            "Golden Retriever",
-            "Caniche",
-            "Chihuahua",
-            "Dalmatien",
-            "Husky Sibérien",
-            "Beagle",
-            "Bouledogue Anglais"
-    };
-
     public Question() {
-        this.image = "image.png";
+        dogsBreed.put("Labrador", "labrador.jpg");
+        dogsBreed.put("German Shepherd", "german_shepherd.webp");
+        dogsBreed.put("French Bulldog", "french_bulldog.webp");
+        dogsBreed.put("Golden retriever", "golden_retriever.jpg");
+        dogsBreed.put("Poodle", "poodle.jpg");
+        dogsBreed.put("Chihuahua", "chihuahua.jpg");
+        dogsBreed.put("Dalmatian", "dalmatian.webp");
+        dogsBreed.put("Husky", "husky.jpeg");
+        dogsBreed.put("Beagle", "beagle.jpeg");
+        dogsBreed.put("English bulldog", "english_bulldog.webp");
     }
 
     public void computeNewQuestion() {
@@ -36,27 +33,28 @@ public class Question {
 
     public void setCorrectAnswer() {
         Random random = new Random();
-        int randomIndex = random.nextInt(dogsBreed.length);
-        this.correctAnswer = dogsBreed[randomIndex];
+        int randomIndex = random.nextInt(dogsBreed.size());
+
+        // Obtenir la clé (nom de la race) à partir de l'index
+        correctAnswer = (String) dogsBreed.keySet().toArray()[randomIndex];
     }
 
     public void setBadAnswerList() {
-        ArrayList<String> selectedDogsBreed = new ArrayList<>();
-        Set<Integer> selectedIndices = new HashSet<>();
+        ArrayList<String> selectedBadAnswers = new ArrayList<>();
+        Set<String> dogBreedsSet = dogsBreed.keySet();
 
         Random random = new Random();
 
         for (int i = 0; i < 3; i++) {
-            int randomIndex;
+            String randomDogBreed;
             do {
-                randomIndex = random.nextInt(dogsBreed.length);
-            } while (selectedIndices.contains(randomIndex) || dogsBreed[randomIndex].equals(this.correctAnswer));
+                randomDogBreed = (String) dogBreedsSet.toArray()[random.nextInt(dogBreedsSet.size())];
+            } while (randomDogBreed.equals(correctAnswer) || selectedBadAnswers.contains(randomDogBreed));
 
-            selectedIndices.add(randomIndex);
-            selectedDogsBreed.add(dogsBreed[randomIndex]);
+            selectedBadAnswers.add(randomDogBreed);
         }
 
-        this.badAnswer = selectedDogsBreed;
+        this.badAnswer = selectedBadAnswers;
     }
 
     public ArrayList<String> getShuffledPropositions() {
@@ -68,10 +66,6 @@ public class Question {
         Collections.shuffle(allPropositions);
 
         return allPropositions;
-    }
-
-    public String getImage() {
-        return image;
     }
 
     public String getCorrectAnswer() {

@@ -1,6 +1,7 @@
 package com.example.wafdogs;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,5 +68,13 @@ public class QuizFragment extends Fragment {
             binding.proposition3.setText(propositions.get(2));
             binding.proposition4.setText(propositions.get(3));
         }
+
+        String breed = question.getCorrectAnswer();
+        String formattedBreed = breed.replace(" ", "_").toLowerCase(); // Remplace les espaces par des underscores et convertit en minuscules
+        int imageResource = getResources().getIdentifier(formattedBreed, "drawable", requireActivity().getPackageName());
+        if (imageResource == 0) {
+            imageResource = getResources().getIdentifier("labrador", "drawable", requireActivity().getPackageName());
+        }
+        binding.breedImage.setImageResource(imageResource);
     }
 }
