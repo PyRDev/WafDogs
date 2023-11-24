@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.wafdogs.databinding.FragmentQuizBinding;
@@ -44,4 +45,18 @@ public class QuizFragment extends Fragment {
         return binding.getRoot();
     }
 
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        viewModel.startGame();
+        viewModel.value.observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                updateValue(s);
+            }
+        });
+    }
+
+    private void updateValue(String s) {
+        binding.proposition.setText(s);
+    }
 }

@@ -17,4 +17,14 @@
         android:background="#9999FF"
         android:textSize="24sp"
         />
+
+    <TextView
+        android:id="@+id/proposition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="What is this race !?"
+        android:layout_margin="60dp"
+        android:padding="16dp"
+        android:textSize="24sp"
+        />
 </LinearLayout>
