@@ -18,13 +18,28 @@
         android:textSize="24sp"
         />
 
-    <TextView
-        android:id="@+id/proposition"
-        android:layout_width="wrap_content"
+    <GridLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="What is this race !?"
-        android:layout_margin="60dp"
-        android:padding="16dp"
-        android:textSize="24sp"
-        />
+        android:layout_margin="16dp"
+        android:columnCount="2"
+        android:rowCount="2"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/proposition1"
+            android:text="prop1" />
+
+        <Button
+            android:id="@+id/proposition2"
+            android:text="prop2" />
+
+        <Button
+            android:id="@+id/proposition3"
+            android:text="prop3" />
+
+        <Button
+            android:id="@+id/proposition4"
+            android:text="prop4" />
+    </GridLayout>
 </LinearLayout>

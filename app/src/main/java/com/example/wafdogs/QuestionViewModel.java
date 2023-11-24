@@ -7,17 +7,18 @@ import com.example.wafdogs.data.Question;
 
 public class QuestionViewModel extends ViewModel {
 
+    MutableLiveData<Question> value = new MutableLiveData<>();
     private Question question;
-
-    MutableLiveData<String> value = new MutableLiveData<>("");
 
     public QuestionViewModel() {
         question = new Question();
     }
 
+    public MutableLiveData<Question> getValue() {
+        return value;
+    }
     public void startGame() {
         question.computeNewQuestion();
-        String correctAnswer = question.getCorrectAnswer();
-        value.postValue(correctAnswer);
+        value.postValue(question);
     }
 }

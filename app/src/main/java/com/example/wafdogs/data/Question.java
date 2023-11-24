@@ -1,7 +1,10 @@
 package com.example.wafdogs.data;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class Question {
 
@@ -24,7 +27,6 @@ public class Question {
 
     public Question() {
         this.image = "image.png";
-        this.correctAnswer = "";
     }
 
     public void computeNewQuestion() {
@@ -38,8 +40,9 @@ public class Question {
         this.correctAnswer = dogsBreed[randomIndex];
     }
 
-    public void setBadAnswerList(){
+    public void setBadAnswerList() {
         ArrayList<String> selectedDogsBreed = new ArrayList<>();
+        Set<Integer> selectedIndices = new HashSet<>();
 
         Random random = new Random();
 
@@ -47,12 +50,24 @@ public class Question {
             int randomIndex;
             do {
                 randomIndex = random.nextInt(dogsBreed.length);
-            } while (dogsBreed[randomIndex].equals(this.correctAnswer));
+            } while (selectedIndices.contains(randomIndex) || dogsBreed[randomIndex].equals(this.correctAnswer));
 
+            selectedIndices.add(randomIndex);
             selectedDogsBreed.add(dogsBreed[randomIndex]);
         }
 
         this.badAnswer = selectedDogsBreed;
+    }
+
+    public ArrayList<String> getShuffledPropositions() {
+        ArrayList<String> allPropositions = new ArrayList<>();
+        allPropositions.add(correctAnswer);
+        allPropositions.addAll(badAnswer);
+
+        // Mélanger les propositions de manière aléatoire
+        Collections.shuffle(allPropositions);
+
+        return allPropositions;
     }
 
     public String getImage() {
