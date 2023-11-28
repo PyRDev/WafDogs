@@ -17,4 +17,37 @@
         android:background="#9999FF"
         android:textSize="24sp"
         />
+
+    <ImageView
+        android:id="@+id/breedImage"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:src="@drawable/labrador"
+        android:contentDescription="Ouaf !"
+        />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:columnCount="2"
+        android:rowCount="2"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/proposition1"
+            android:text="prop1" />
+
+        <Button
+            android:id="@+id/proposition2"
+            android:text="prop2" />
+
+        <Button
+            android:id="@+id/proposition3"
+            android:text="prop3" />
+
+        <Button
+            android:id="@+id/proposition4"
+            android:text="prop4" />
+    </GridLayout>
 </LinearLayout>

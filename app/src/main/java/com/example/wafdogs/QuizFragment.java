@@ -1,18 +1,30 @@
 package com.example.wafdogs;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.wafdogs.data.Question;
+import com.example.wafdogs.databinding.FragmentQuizBinding;
+
+import java.util.ArrayList;
 
 public class QuizFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private QuestionViewModel viewModel;
+
+    private FragmentQuizBinding binding;
 
     public QuizFragment() {
         // Required empty public constructor
@@ -25,12 +37,87 @@ public class QuizFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_quiz, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater,@Nullable ViewGroup container,
+                            @Nullable Bundle savedInstanceState) {
+        binding = FragmentQuizBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        viewModel.startGame();
+        viewModel.value.observe(getViewLifecycleOwner(), new Observer<Question>() {
+            @Override
+            public void onChanged(Question question) {
+                updateValues(question);
+            }
+        });
+
+        binding.proposition1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkAnswer(binding.proposition1.getText().toString());
+            }
+        });
+
+        binding.proposition2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkAnswer(binding.proposition2.getText().toString());
+            }
+        });
+
+        binding.proposition3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkAnswer(binding.proposition3.getText().toString());
+            }
+        });
+
+        binding.proposition4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkAnswer(binding.proposition4.getText().toString());
+            }
+        });
+    }
+
+    private void updateValues(Question question) {
+        ArrayList<String> propositions = question.getShuffledPropositions();
+        if (propositions.size() >= 4) {
+            binding.proposition1.setText(propositions.get(0));
+            binding.proposition2.setText(propositions.get(1));
+            binding.proposition3.setText(propositions.get(2));
+            binding.proposition4.setText(propositions.get(3));
+        }
+
+        String breed = question.getCorrectAnswer();
+        String formattedBreed = breed.replace(" ", "_").toLowerCase(); // Remplace les espaces par des underscores et convertit en minuscules
+        int imageResource = getResources().getIdentifier(formattedBreed, "drawable", requireActivity().getPackageName());
+        if (imageResource == 0) {
+            imageResource = getResources().getIdentifier("labrador", "drawable", requireActivity().getPackageName());
+        }
+        binding.breedImage.setImageResource(imageResource);
+    }
+
+    private void checkAnswer(String selectedAnswer) {
+        String correctAnswer = viewModel.getValue().getValue().getCorrectAnswer();
+
+        if (selectedAnswer.equals(correctAnswer)) {
+            // La réponse est correcte, vous pouvez effectuer des actions appropriées ici
+            Log.d("QuizFragment", "Réponse correcte!");
+        } else {
+            // La réponse est incorrecte, vous pouvez effectuer des actions appropriées ici
+            Log.d("QuizFragment", "Réponse incorrecte!");
+        }
+
+        // Passer à la question suivante
+        viewModel.nextValue();
     }
 }
