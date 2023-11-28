@@ -21,4 +21,9 @@ public class QuestionViewModel extends ViewModel {
         question.computeNewQuestion();
         value.postValue(question);
     }
+
+    public void nextValue() {
+        question.computeNewQuestion();
+        value.postValue(question);
+    }
 }

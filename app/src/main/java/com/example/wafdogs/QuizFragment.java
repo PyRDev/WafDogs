@@ -58,6 +58,34 @@ public class QuizFragment extends Fragment {
                 updateValues(question);
             }
         });
+
+        binding.proposition1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkAnswer(binding.proposition1.getText().toString());
+            }
+        });
+
+        binding.proposition2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkAnswer(binding.proposition2.getText().toString());
+            }
+        });
+
+        binding.proposition3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkAnswer(binding.proposition3.getText().toString());
+            }
+        });
+
+        binding.proposition4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkAnswer(binding.proposition4.getText().toString());
+            }
+        });
     }
 
     private void updateValues(Question question) {
@@ -76,5 +104,20 @@ public class QuizFragment extends Fragment {
             imageResource = getResources().getIdentifier("labrador", "drawable", requireActivity().getPackageName());
         }
         binding.breedImage.setImageResource(imageResource);
+    }
+
+    private void checkAnswer(String selectedAnswer) {
+        String correctAnswer = viewModel.getValue().getValue().getCorrectAnswer();
+
+        if (selectedAnswer.equals(correctAnswer)) {
+            // La réponse est correcte, vous pouvez effectuer des actions appropriées ici
+            Log.d("QuizFragment", "Réponse correcte!");
+        } else {
+            // La réponse est incorrecte, vous pouvez effectuer des actions appropriées ici
+            Log.d("QuizFragment", "Réponse incorrecte!");
+        }
+
+        // Passer à la question suivante
+        viewModel.nextValue();
     }
 }

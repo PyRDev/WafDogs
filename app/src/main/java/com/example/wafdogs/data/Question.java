@@ -35,7 +35,6 @@ public class Question {
         Random random = new Random();
         int randomIndex = random.nextInt(dogsBreed.size());
 
-        // Obtenir la clé (nom de la race) à partir de l'index
         correctAnswer = (String) dogsBreed.keySet().toArray()[randomIndex];
     }
 
