@@ -9,6 +9,7 @@ public class QuestionViewModel extends ViewModel {
 
     MutableLiveData<Question> value = new MutableLiveData<>();
     private Question question;
+    private int lives = 3;
 
     public QuestionViewModel() {
         question = new Question();
@@ -25,5 +26,13 @@ public class QuestionViewModel extends ViewModel {
     public void nextValue() {
         question.computeNewQuestion();
         value.postValue(question);
+    }
+
+    public int getLives() {
+        return lives;
+    }
+
+    public void decrementLives() {
+        lives--;
     }
 }
