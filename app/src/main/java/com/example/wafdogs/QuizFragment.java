@@ -39,9 +39,9 @@ public class QuizFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
+        viewModel.setLives(3);
     }
 
     @Override
@@ -116,7 +116,7 @@ public class QuizFragment extends Fragment {
             imageResource = getResources().getIdentifier("labrador", "drawable", requireActivity().getPackageName());
         }
         binding.breedImage.setImageResource(imageResource);
-        binding.livesText.setText("Lives: "+ viewModel.getLives());
+        binding.livesText.setText("Lives: "+ viewModel.getLives().getValue());
     }
 
     private void checkAnswer(String selectedAnswer) {

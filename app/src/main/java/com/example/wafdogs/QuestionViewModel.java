@@ -1,5 +1,6 @@
 package com.example.wafdogs;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -8,8 +9,9 @@ import com.example.wafdogs.data.Question;
 public class QuestionViewModel extends ViewModel {
 
     MutableLiveData<Question> value = new MutableLiveData<>();
+
+    MutableLiveData<Integer> lives = new MutableLiveData<>(3);
     private Question question;
-    private int lives = 3;
 
     public QuestionViewModel() {
         question = new Question();
@@ -28,11 +30,17 @@ public class QuestionViewModel extends ViewModel {
         value.postValue(question);
     }
 
-    public int getLives() {
+    public LiveData<Integer> getLives() {
         return lives;
     }
 
+    public void setLives(int value) {
+        lives.setValue(value);
+    }
+
     public void decrementLives() {
-        lives--;
+        if (lives.getValue() != null) {
+            lives.setValue(lives.getValue() - 1);
+        }
     }
 }
