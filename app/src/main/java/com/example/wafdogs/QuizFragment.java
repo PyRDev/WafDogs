@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -37,9 +39,9 @@ public class QuizFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
+        viewModel.setLives(3);
     }
 
     @Override
@@ -56,6 +58,16 @@ public class QuizFragment extends Fragment {
             @Override
             public void onChanged(Question question) {
                 updateValues(question);
+            }
+        });
+
+        viewModel.getLives().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer lives) {
+                if (lives <= 0) {
+                    // Rediriger vers WelcomeFragment ou effectuer d'autres actions
+                    navigateToWelcomeFragment();
+                }
             }
         });
 
@@ -104,6 +116,7 @@ public class QuizFragment extends Fragment {
             imageResource = getResources().getIdentifier("labrador", "drawable", requireActivity().getPackageName());
         }
         binding.breedImage.setImageResource(imageResource);
+        binding.livesText.setText("Lives: "+ viewModel.getLives().getValue());
     }
 
     private void checkAnswer(String selectedAnswer) {
@@ -114,10 +127,22 @@ public class QuizFragment extends Fragment {
             Log.d("QuizFragment", "Réponse correcte!");
         } else {
             // La réponse est incorrecte, vous pouvez effectuer des actions appropriées ici
+            viewModel.decrementLives();
             Log.d("QuizFragment", "Réponse incorrecte!");
         }
 
         // Passer à la question suivante
         viewModel.nextValue();
+    }
+
+    private void navigateToWelcomeFragment(){
+        //Naviguer vers WelcomeFragment
+
+
+        FragmentManager fragmentManager = getParentFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        WelcomeFragment welcomeFragment = WelcomeFragment.newInstance();
+        fragmentTransaction.replace(R.id.fragment_container_view, welcomeFragment);
+        fragmentTransaction.commit();
     }
 }

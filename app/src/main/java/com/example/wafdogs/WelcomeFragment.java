@@ -1,6 +1,9 @@
 package com.example.wafdogs;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,17 +11,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.wafdogs.databinding.FragmentWelcomeBinding;
 
 public class WelcomeFragment extends Fragment {
 
     private FragmentWelcomeBinding binding;
 
-    public static WelcomeFragment newInstance(String param1, String param2) {
+    public static WelcomeFragment newInstance() {
         WelcomeFragment fragment = new WelcomeFragment();
         return fragment;
     }
