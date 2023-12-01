@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:background="#333333"
     tools:context=".QuizFragment">
 
     <TextView
@@ -13,18 +14,21 @@
         android:layout_height="wrap_content"
         android:text="Lives: 3"
         android:layout_marginTop="16dp"
-        android:textSize="18sp"
+        android:textSize="22sp"
+        android:textColor="#FF9952"
         />
 
     <TextView
         android:id="@+id/titleMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="What is this race !?"
         android:layout_margin="60dp"
-        android:padding="16dp"
-        android:background="#9999FF"
-        android:textSize="24sp"
+        android:textSize="32sp"
+        android:textColor="#FF9952"
+        android:textStyle="bold"
+        android:gravity="center"
         />
 
     <ImageView
@@ -45,18 +49,47 @@
 
         <Button
             android:id="@+id/proposition1"
-            android:text="prop1" />
+            android:layout_columnWeight="1"
+            android:layout_width="0dp"
+            android:text="prop1"
+            android:backgroundTint="#4CAF50"
+            android:layout_margin="8dp"
+            android:paddingVertical="14dp"
+            android:textSize="20dp"
+        />
 
         <Button
             android:id="@+id/proposition2"
-            android:text="prop2" />
+            android:layout_columnWeight="1"
+            android:layout_width="0dp"
+            android:text="prop2"
+            android:backgroundTint="#2196F3"
+            android:layout_margin="8dp"
+            android:paddingVertical="14dp"
+            android:textSize="20dp"
+        />
 
         <Button
             android:id="@+id/proposition3"
-            android:text="prop3" />
+            android:layout_columnWeight="1"
+            android:layout_width="0dp"
+            android:text="prop3"
+            android:backgroundTint="#FFC107"
+            android:layout_margin="8dp"
+            android:paddingVertical="14dp"
+            android:textSize="20dp"
+        />
 
         <Button
             android:id="@+id/proposition4"
-            android:text="prop4" />
+            android:layout_columnWeight="1"
+            android:layout_width="0dp"
+            android:text="prop4"
+            android:backgroundTint="#FF5722"
+            android:layout_margin="8dp"
+            android:paddingVertical="14dp"
+            android:textSize="20dp"
+        />
     </GridLayout>
+
 </LinearLayout>
