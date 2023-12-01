@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:background="#333333"
     tools:context=".WelcomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -12,20 +13,42 @@
         android:id="@+id/welcomeMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to WafDogs !"
+        android:text="WafDogs"
         android:layout_margin="60dp"
-        android:padding="16dp"
-        android:background="#9999FF"
-        android:textSize="24sp"
+        android:textSize="36sp"
+        android:textColor="#FF9952"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Learn to recognize dog breeds with WafDogs!"
+        android:textSize="22sp"
+        android:textColor="#808080"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="You have 3 lives to discover as many races as possible and earn the highest score."
+        android:textSize="22sp"
+        android:textColor="#808080"
+        android:gravity="center"
         />
 
     <Button
         android:id="@+id/playButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Start game"
-        android:layout_margin="16dp"
-        android:paddingHorizontal="24dp"
-        android:textSize="14sp"
+        android:layout_margin="32dp"
+        android:paddingHorizontal="48dp"
+        android:paddingVertical="14dp"
+        android:textSize="22sp"
+        android:backgroundTint="#FF9952"
         />
 </LinearLayout>
