@@ -71,6 +71,13 @@ public class QuizFragment extends Fragment {
             }
         });
 
+        viewModel.getScore().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer score) {
+                updateScore(score);
+            }
+        });
+
         binding.proposition1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,26 +126,25 @@ public class QuizFragment extends Fragment {
         binding.livesText.setText("Lives: "+ viewModel.getLives().getValue());
     }
 
+    private void updateScore(int score) {
+        binding.scoreText.setText("Score: " + score);
+    }
+
     private void checkAnswer(String selectedAnswer) {
         String correctAnswer = viewModel.getValue().getValue().getCorrectAnswer();
 
         if (selectedAnswer.equals(correctAnswer)) {
-            // La réponse est correcte, vous pouvez effectuer des actions appropriées ici
+            viewModel.incrementScore(100);
             Log.d("QuizFragment", "Réponse correcte!");
         } else {
-            // La réponse est incorrecte, vous pouvez effectuer des actions appropriées ici
             viewModel.decrementLives();
             Log.d("QuizFragment", "Réponse incorrecte!");
         }
 
-        // Passer à la question suivante
         viewModel.nextValue();
     }
 
     private void navigateToWelcomeFragment(){
-        //Naviguer vers WelcomeFragment
-
-
         FragmentManager fragmentManager = getParentFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         WelcomeFragment welcomeFragment = WelcomeFragment.newInstance();

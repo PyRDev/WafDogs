@@ -11,6 +11,9 @@ public class QuestionViewModel extends ViewModel {
     MutableLiveData<Question> value = new MutableLiveData<>();
 
     MutableLiveData<Integer> lives = new MutableLiveData<>(3);
+
+    MutableLiveData<Integer> score = new MutableLiveData<>(0);
+
     private Question question;
 
     public QuestionViewModel() {
@@ -34,6 +37,10 @@ public class QuestionViewModel extends ViewModel {
         return lives;
     }
 
+    public LiveData<Integer> getScore() {
+        return score;
+    }
+
     public void setLives(int value) {
         lives.setValue(value);
     }
@@ -42,5 +49,10 @@ public class QuestionViewModel extends ViewModel {
         if (lives.getValue() != null) {
             lives.setValue(lives.getValue() - 1);
         }
+    }
+
+    public void incrementScore(int points) {
+        int currentScore = score.getValue() != null ? score.getValue() : 0;
+        score.setValue(currentScore + points);
     }
 }
